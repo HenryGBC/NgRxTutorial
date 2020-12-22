@@ -12,11 +12,7 @@ export const login = createAction(
 );
 export const loginComplete = createAction(
   '[Auth] loginComplete',
-  props<{ isLogged: boolean; token: string }>()
-);
-export const loginGuardComplete = createAction(
-  '[Auth] loginGuardComplete',
-  props<{ isLogged: boolean; token: string }>()
+  props<{ isLogged: boolean; token: string; hasRedirect: boolean }>()
 );
 export const logout = createAction('[Auth] Logout');
 export const logoutComplete = createAction('[Auth] logoutComplete');

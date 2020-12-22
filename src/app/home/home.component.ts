@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectIsAuthenticated, selectToken } from '../core/store/auth';
+import { logout, selectIsAuthenticated, selectToken } from '../core/store/auth';
 
 @Component({
   selector: 'app-home',
@@ -22,5 +22,9 @@ export class HomeComponent implements OnInit {
     this.token$.subscribe((data) => {
       console.log(data);
     });
+  }
+
+  logout() {
+    this._store.dispatch(logout());
   }
 }

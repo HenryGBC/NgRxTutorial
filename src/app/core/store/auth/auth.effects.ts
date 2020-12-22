@@ -19,16 +19,15 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(authActions.login),
       switchMap((payload) =>
-        this._authService
-          .login(payload)
-          .pipe(
-            map((response) =>
-              authActions.loginComplete({
-                isLogged: true,
-                token: response.token,
-              })
-            )
+        this._authService.login(payload).pipe(
+          map((response) =>
+            authActions.loginComplete({
+              isLogged: true,
+              token: response.token,
+              hasRedirect: true,
+            })
           )
+        )
       )
     )
   );
@@ -39,7 +38,18 @@ export class AuthEffects {
         ofType(authActions.loginComplete),
         tap((data) => {
           localStorage.setItem('token', data.token);
-          this._router.navigateByUrl('/');
+          if (data.hasRedirect) this._router.navigateByUrl('/');
+        })
+      ),
+    { dispatch: false }
+  );
+  logout$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(authActions.logout),
+        tap(() => {
+          localStorage.removeItem('token');
+          this._router.navigateByUrl('/auth/login');
         })
       ),
     { dispatch: false }

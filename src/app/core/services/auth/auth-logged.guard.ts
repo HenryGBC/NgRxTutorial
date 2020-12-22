@@ -6,7 +6,7 @@ import {
   CanActivate,
 } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { loginGuardComplete } from '../../store/auth/auth.actions';
+import { loginComplete } from '../../store/auth/auth.actions';
 import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
@@ -28,7 +28,7 @@ export class LoggedGuard implements CanActivate {
     if (isLogged) {
       const token = this._authService.getToken();
       this._store.dispatch(
-        loginGuardComplete({ token: token, isLogged: true })
+        loginComplete({ token: token, isLogged: true, hasRedirect: false })
       );
       return true;
     }

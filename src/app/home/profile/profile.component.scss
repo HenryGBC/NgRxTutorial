@@ -1,0 +1,36 @@
+.card {
+  padding: 2rem;
+  text-align: center;
+  .avatar {
+    width: 160px;
+    height: 160px;
+    margin: 15px auto;
+    background-color: #1bc5bd;
+    border-radius: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .bio {
+    h4 {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    p {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: gray;
+      letter-spacing: 1px;
+    }
+  }
+
+  .description {
+    p {
+      font-size: 0.9rem;
+      line-height: 1rem;
+      margin-top: 10px;
+    }
+  }
+}
