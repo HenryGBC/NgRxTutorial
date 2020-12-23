@@ -1,15 +1,15 @@
 <div class="card">
-  <form>
+  <form [formGroup]="linkForm" (ngSubmit)="submitForm()">
     <div class="field">
       <label for="link">Enlace a guardar</label>
       <div class="control">
-        <input type="text" name="link" />
+        <input type="text" name="link" formControlName="url" />
       </div>
     </div>
     <div class="field">
       <label for="name">Nombre del enlace</label>
       <div class="control">
-        <input type="text" name="name" />
+        <input type="text" name="name" formControlName="name" />
       </div>
     </div>
     <button class="button is-primary" type="submit">Agregar</button>

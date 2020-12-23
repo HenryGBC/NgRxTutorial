@@ -13,9 +13,19 @@
     <div class="links">
       <app-add-link></app-add-link>
       <div class="list-links">
-        <app-link></app-link>
-        <app-link></app-link>
-        <app-link></app-link>
+        <ng-container *ngIf="loadingLinks$ | async">
+          <h1>Cargando</h1>
+        </ng-container>
+        <ng-container *ngIf="!(loadingLinks$ | async)">
+          <ng-container *ngIf="links$ | async as links">
+            <ng-container *ngIf="links.length">
+              <app-link [link]="link" *ngFor="let link of links"></app-link>
+            </ng-container>
+            <ng-container *ngIf="!links.length">
+              <h1>Vacio</h1>
+            </ng-container>
+          </ng-container>
+        </ng-container>
       </div>
     </div>
   </div>
