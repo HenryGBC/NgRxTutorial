@@ -6,7 +6,10 @@
     </button>
   </div>
   <div class="grid">
-    <app-profile></app-profile>
+    <app-profile
+      [user]="user$ | async"
+      [loading]="loading$ | async"
+    ></app-profile>
     <div class="links">
       <app-add-link></app-add-link>
       <div class="list-links">

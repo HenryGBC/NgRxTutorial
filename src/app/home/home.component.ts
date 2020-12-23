@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { logout, selectIsAuthenticated, selectToken } from '../core/store/auth';
+import { getUser, setLoaderUser } from '../core/store/user/user.actions';
+import { User } from '../core/store/user/user.state';
+import * as userSelectors from '../core/store/user/user.selectors';
+import { logout } from '../core/store/auth/auth.actions';
 
 @Component({
   selector: 'app-home',
@@ -9,19 +12,17 @@ import { logout, selectIsAuthenticated, selectToken } from '../core/store/auth';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  isLoggedIn$: Observable<boolean>;
-  token$: Observable<string>;
-  constructor(private _store: Store) {}
+  user$: Observable<User>;
+  loading$: Observable<boolean>;
+  constructor(private _store: Store) {
+    this.user$ = this._store.select(userSelectors.selectUser);
+    this.loading$ = this._store.select(userSelectors.selectLoader);
+  }
 
   ngOnInit(): void {
-    this.isLoggedIn$ = this._store.pipe(select(selectIsAuthenticated));
-    this.isLoggedIn$.subscribe((data) => {
-      console.log(data);
-    });
-    this.token$ = this._store.pipe(select(selectToken));
-    this.token$.subscribe((data) => {
-      console.log(data);
-    });
+    this._store.dispatch(setLoaderUser({ loading: true }));
+    this._store.dispatch(getUser());
+    // this.user$.subscribe((user) => console.log(user));
   }
 
   logout() {

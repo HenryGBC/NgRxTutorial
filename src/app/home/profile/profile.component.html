@@ -1,19 +1,19 @@
 <div class="card">
-  <div class="avatar">
-    <img
-      src="https://preview.keenthemes.com/metronic/theme/html/demo5/dist/assets/media/svg/avatars/018-girl-9.svg"
-      alt=""
-    />
-  </div>
-  <div class="bio">
-    <h4>Name User</h4>
-    <p>Computer Engineer</p>
-  </div>
-  <div class="description">
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus eaque,
-      qui eum deserunt exercitationem cupiditate enim quae nam nesciunt
-      explicabo aut officiis recusandae.
-    </p>
-  </div>
+  <ng-container *ngIf="loading && !user">
+    <p>Cargando</p>
+  </ng-container>
+  <ng-container *ngIf="!loading && user">
+    <div class="avatar">
+      <img src="{{ user.avatar }}" alt="{{ user.fullName }}" />
+    </div>
+    <div class="bio">
+      <h4>{{ user.fullName }}</h4>
+      <p>{{ user.role }}</p>
+    </div>
+    <div class="description">
+      <p>
+        {{ user.description }}
+      </p>
+    </div>
+  </ng-container>
 </div>
