@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { map, mergeMap, catchError, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth/auth.service';
 import * as authActions from './auth.actions';
@@ -23,9 +23,16 @@ export class AuthEffects {
           map((response) =>
             authActions.loginComplete({
               isLogged: true,
-              token: response.token,
+              token: response.access_token,
               hasRedirect: true,
             })
+          ),
+          catchError(() =>
+            of(
+              authActions.errorLogin({
+                errorMessageLogin: 'Email existe o password invalido',
+              })
+            )
           )
         )
       )

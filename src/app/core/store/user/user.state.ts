@@ -4,6 +4,7 @@ export interface User {
   role: string;
   description: string;
   countLinks: number;
+  password: string | null;
 }
 
 export interface UserState {

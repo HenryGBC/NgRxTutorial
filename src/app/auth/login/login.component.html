@@ -30,6 +30,11 @@
           *Requerido
         </p>
       </div>
+      <ng-container *ngIf="hasErrorLogin$ | async">
+        <p class="help is-danger">
+          {{ loginErrorMsg$ | async }}
+        </p>
+      </ng-container>
       <button class="button is-primary" type="submit">Login</button>
     </form>
   </div>

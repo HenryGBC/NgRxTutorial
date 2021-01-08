@@ -6,6 +6,8 @@ export const initialAuthState: AuthState = {
   isLogged: false,
   token: '',
   hasRedirect: false,
+  hasErrorLogin: null,
+  errorMessageLogin: null,
 };
 
 const authReducerInternal = createReducer(
@@ -16,6 +18,7 @@ const authReducerInternal = createReducer(
       isLogged,
       token,
       hasRedirect,
+      hasErrorLogin: false,
     };
   }),
   on(authActions.logout, (state, {}) => {
@@ -24,6 +27,15 @@ const authReducerInternal = createReducer(
       isLogged: false,
       token: '',
       hasRedirect: false,
+      hasErrorLogin: false,
+    };
+  }),
+  on(authActions.errorLogin, (state, { errorMessageLogin }) => {
+    console.log(errorMessageLogin);
+    return {
+      ...state,
+      hasErrorLogin: true,
+      errorMessageLogin,
     };
   })
 );

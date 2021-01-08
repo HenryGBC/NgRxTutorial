@@ -1,5 +1,7 @@
 export interface AuthState {
-  isLogged: boolean;
-  token: string;
-  hasRedirect: boolean;
+  isLogged: boolean | null;
+  token: string | null;
+  hasRedirect: boolean | null;
+  hasErrorLogin: boolean | null;
+  errorMessageLogin: string | null;
 }

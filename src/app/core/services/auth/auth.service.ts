@@ -1,15 +1,17 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor() {}
+  constructor(private _http: HttpClient) {}
 
   login(data: any): Observable<any> {
-    const tokenResponse = {
-      token: '12312312312',
-    };
-    return of(tokenResponse);
+    // const tokenResponse = {
+    //   token: '12312312312',
+    // };
+    // return of(tokenResponse);
+    return this._http.post('auth/login', data);
   }
 
   isLoggedIn(): boolean {
