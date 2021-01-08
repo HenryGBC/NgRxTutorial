@@ -6,26 +6,11 @@
     </button>
   </div>
   <div class="grid">
-    <app-profile
-      [user]="user$ | async"
-      [loading]="loading$ | async"
-    ></app-profile>
+    <app-profile [user]="user"></app-profile>
     <div class="links">
       <app-add-link></app-add-link>
       <div class="list-links">
-        <ng-container *ngIf="loadingLinks$ | async">
-          <h1>Cargando</h1>
-        </ng-container>
-        <ng-container *ngIf="!(loadingLinks$ | async)">
-          <ng-container *ngIf="links$ | async as links">
-            <ng-container *ngIf="links.length">
-              <app-link [link]="link" *ngFor="let link of links"></app-link>
-            </ng-container>
-            <ng-container *ngIf="!links.length">
-              <h1>Vacio</h1>
-            </ng-container>
-          </ng-container>
-        </ng-container>
+        <!-- <app-link [link]="link" *ngFor="let link of links"></app-link> -->
       </div>
     </div>
   </div>

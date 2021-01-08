@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { addLink } from 'src/app/core/store/links/links.actions';
-import * as linksSelector from '../../core/store/links/links.selectors';
 @Component({
   selector: 'app-add-link',
   templateUrl: './add-link.component.html',
@@ -12,9 +10,7 @@ import * as linksSelector from '../../core/store/links/links.selectors';
 })
 export class AddLinkComponent implements OnInit {
   linkForm: FormGroup;
-  selectAddLink$: Observable<boolean>;
   constructor(private _formBuilder: FormBuilder, private _store: Store) {
-    this.selectAddLink$ = this._store.select(linksSelector.selectAddLink);
     this._initForm();
   }
 
@@ -41,16 +37,12 @@ export class AddLinkComponent implements OnInit {
     const data = { ...this.linkForm.value };
     console.log(data);
     // this._store.dispatch(login(data));
-    this._store.dispatch(addLink({ loading: false, link: data }));
   }
 
   private _initForm(): void {
     this.linkForm = this._formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
       url: ['', Validators.compose([Validators.required])],
-    });
-    this.selectAddLink$.subscribe((res) => {
-      if (res) this.linkForm.reset();
     });
   }
 }

@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { login } from 'src/app/core/store/auth/auth.actions';
-import * as authSelectors from '../../core/store/auth/auth.selectors';
 
 @Component({
   selector: 'app-login',
@@ -12,17 +9,9 @@ import * as authSelectors from '../../core/store/auth/auth.selectors';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  hasErrorLogin$: Observable<boolean>;
-  loginErrorMsg$: Observable<string>;
 
-  constructor(private _formBuilder: FormBuilder, private _store: Store) {
+  constructor(private _formBuilder: FormBuilder) {
     this._initForm();
-    this.hasErrorLogin$ = this._store.select(
-      authSelectors.selectIsAuthStateLoginError
-    );
-    this.loginErrorMsg$ = this._store.select(
-      authSelectors.selectIsAuthStateLoginErrorMsg
-    );
   }
 
   ngOnInit(): void {}
@@ -48,7 +37,6 @@ export class LoginComponent implements OnInit {
     }
     const data = { ...this.loginForm.value };
     console.log(data);
-    this._store.dispatch(login(data));
   }
 
   private _initForm(): void {
