@@ -6,18 +6,17 @@ import { AppComponent } from './app.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppInterceptorService } from './core/interceptors/interceptor';
+import { AppMockInterceptorService } from './core/interceptors/interceptor-mock';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-    }),
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppMockInterceptorService,
+      multi: true,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AppInterceptorService,

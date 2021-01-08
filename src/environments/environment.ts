@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://pc0j5psjrc.execute-api.us-east-1.amazonaws.com/dev/api/',
+  apiUrl: '',
+  isTestServer: true,
 };
 
 /*

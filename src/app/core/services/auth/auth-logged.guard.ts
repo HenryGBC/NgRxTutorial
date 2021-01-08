@@ -5,17 +5,12 @@ import {
   Router,
   CanActivate,
 } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
 })
 export class LoggedGuard implements CanActivate {
-  constructor(
-    private _router: Router,
-    private _authService: AuthService,
-    private _store: Store
-  ) {}
+  constructor(private _router: Router, private _authService: AuthService) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,

@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
     description: 'Frontend Love',
     countLinks: '4',
   };
-  constructor(private _store: Store) {}
+  constructor() {}
 
   ngOnInit(): void {}
 

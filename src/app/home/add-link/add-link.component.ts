@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class AddLinkComponent implements OnInit {
   linkForm: FormGroup;
-  constructor(private _formBuilder: FormBuilder, private _store: Store) {
+  constructor(private _formBuilder: FormBuilder) {
     this._initForm();
   }
 
