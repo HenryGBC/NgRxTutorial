@@ -1,37 +1,37 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import * as authActions from './auth.actions';
-import { AuthState } from './auth.model';
+import { AuthState } from './auth.state';
 
 export const initialAuthState: AuthState = {
   isLogged: false,
   token: '',
-  hasRedirect: false,
   hasErrorLogin: null,
   errorMessageLogin: null,
 };
 
 const authReducerInternal = createReducer(
   initialAuthState,
-  on(authActions.loginComplete, (state, { isLogged, token, hasRedirect }) => {
+  on(authActions.loginComplete, (state, { token }) => {
     return {
       ...state,
-      isLogged,
+      isLogged: true,
       token,
-      hasRedirect,
-      hasErrorLogin: false,
+    };
+  }),
+  on(authActions.setLogged, (state, { token }) => {
+    return {
+      ...state,
+      isLogged: true,
+      token,
     };
   }),
   on(authActions.logout, (state, {}) => {
     return {
       ...state,
-      isLogged: false,
-      token: '',
-      hasRedirect: false,
-      hasErrorLogin: false,
+      initialAuthState,
     };
   }),
   on(authActions.errorLogin, (state, { errorMessageLogin }) => {
-    console.log(errorMessageLogin);
     return {
       ...state,
       hasErrorLogin: true,

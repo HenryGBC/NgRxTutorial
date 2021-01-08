@@ -6,10 +6,15 @@ export const login = createAction(
 );
 export const loginComplete = createAction(
   '[Auth] LoginComplete',
-  props<{ isLogged: boolean; token: string; hasRedirect: boolean }>()
+  props<{ token: string }>()
 );
+
+export const setLogged = createAction(
+  '[Auth] SetLogged',
+  props<{ token: string }>()
+);
+
 export const logout = createAction('[Auth] Logout');
-export const logoutComplete = createAction('[Auth] LogoutComplete');
 export const errorLogin = createAction(
   '[Auth] ErrorLogin',
   props<{ errorMessageLogin: string }>()

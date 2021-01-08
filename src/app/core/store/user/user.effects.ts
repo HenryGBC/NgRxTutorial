@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Action } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
 import { map, mergeMap, catchError, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth/auth.service';
 import * as userActions from './user.actions';
@@ -24,7 +22,6 @@ export class UserEffects {
           map((response) =>
             userActions.updateUser({
               user: response,
-              loading: false,
             })
           )
         )

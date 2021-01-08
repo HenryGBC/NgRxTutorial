@@ -1,13 +1,6 @@
-export interface User {
-  fullName: string;
-  avatar: string;
-  role: string;
-  description: string;
-  countLinks: number;
-  password: string | null;
-}
+import { User } from '../../models/user';
 
 export interface UserState {
-  loading: boolean;
   user: User | null;
+  loading: boolean;
 }

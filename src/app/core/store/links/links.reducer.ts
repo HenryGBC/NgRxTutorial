@@ -5,33 +5,33 @@ import { Link } from '../../models/links';
 
 export const initialLinksState: LinksState = {
   links: [],
-  loading: true,
+  loading: false,
   addLink: null,
   errorAddLink: null,
 };
 
 const linksReducerInternal = createReducer(
   initialLinksState,
-  on(linksActions.loadLinks, (state, { loading }) => {
+  on(linksActions.loadLinks, (state, {}) => {
     return {
       ...state,
-      loading,
+      loading: true,
     };
   }),
-  on(linksActions.loadLinksComplete, (state, { loading, links }) => {
+  on(linksActions.loadLinksComplete, (state, { links }) => {
     return {
       ...state,
-      loading,
+      loading: false,
       links,
     };
   }),
-  on(linksActions.addLink, (state, { loading, link }) => {
+  on(linksActions.addLink, (state, { link }) => {
     return {
       ...state,
-      loading,
+      addLink: false,
     };
   }),
-  on(linksActions.addLInkComplete, (state, { link }) => {
+  on(linksActions.addLinkComplete, (state, { link }) => {
     return {
       ...state,
       loading: false,

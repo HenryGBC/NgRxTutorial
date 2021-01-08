@@ -6,7 +6,6 @@ export const initialUserState: UserState = {
   loading: false,
   user: null,
 };
-
 const userReducerInternal = createReducer(
   initialUserState,
   on(userActions.updateUser, (state, { user }) => {
@@ -17,19 +16,14 @@ const userReducerInternal = createReducer(
       user,
     };
   }),
-  on(userActions.setLoaderUser, (state, { loading }) => {
+  on(userActions.getUser, (state, {}) => {
+    const loading = true;
     return {
       ...state,
       loading,
     };
-  }),
-  on(userActions.getUser, (state) => {
-    return {
-      ...state,
-    };
   })
 );
-
 export function userReducer(state: UserState | undefined, action: Action) {
   return userReducerInternal(state, action);
 }

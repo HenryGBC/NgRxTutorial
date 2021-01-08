@@ -11,7 +11,7 @@ export class AuthService {
     //   token: '12312312312',
     // };
     // return of(tokenResponse);
-    return this._http.post('auth/login', data);
+    return this._http.post('/auth/login/', data);
   }
 
   isLoggedIn(): boolean {

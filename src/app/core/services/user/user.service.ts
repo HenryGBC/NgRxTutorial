@@ -2,13 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { User } from '../../store/user/user.state';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
   constructor(private _http: HttpClient) {}
 
-  getUser(): Observable<User> {
+  getUser(): Observable<any> {
     // const userResponse = {
     //   fullName: 'Henry Bravo',
     //   avatar:
@@ -18,6 +17,6 @@ export class UserService {
     //   countLinks: 4,
     // };
     // return of(userResponse).pipe(delay(5000));
-    return this._http.get<User>('users/user');
+    return this._http.get('/users/user/');
   }
 }

@@ -22,15 +22,13 @@ export class AuthEffects {
         this._authService.login(payload).pipe(
           map((response) =>
             authActions.loginComplete({
-              isLogged: true,
               token: response.access_token,
-              hasRedirect: true,
             })
           ),
           catchError(() =>
             of(
               authActions.errorLogin({
-                errorMessageLogin: 'Email existe o password invalido',
+                errorMessageLogin: 'Errorrrr',
               })
             )
           )
@@ -45,11 +43,12 @@ export class AuthEffects {
         ofType(authActions.loginComplete),
         tap((data) => {
           localStorage.setItem('token', data.token);
-          if (data.hasRedirect) this._router.navigateByUrl('/');
+          this._router.navigateByUrl('/');
         })
       ),
     { dispatch: false }
   );
+
   logout$ = createEffect(
     () =>
       this.actions$.pipe(

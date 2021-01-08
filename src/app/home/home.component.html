@@ -6,10 +6,8 @@
     </button>
   </div>
   <div class="grid">
-    <app-profile
-      [user]="user$ | async"
-      [loading]="loading$ | async"
-    ></app-profile>
+    <app-profile [user]="user$ | async" [loading]="loadingUser$ | async">
+    </app-profile>
     <div class="links">
       <app-add-link></app-add-link>
       <div class="list-links">
@@ -26,6 +24,7 @@
             </ng-container>
           </ng-container>
         </ng-container>
+        <!-- <app-link [link]="link" *ngFor="let link of links"></app-link> -->
       </div>
     </div>
   </div>

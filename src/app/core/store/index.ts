@@ -1,6 +1,6 @@
-import { AuthState } from '../models/auth';
 import { AuthEffects } from './auth/auth.effects';
 import { authReducer } from './auth/auth.reducer';
+import { AuthState } from './auth/auth.state';
 import { LinksEffects } from './links/links.effects';
 import { linksReducer } from './links/links.reducer';
 import { LinksState } from './links/links.state';
@@ -13,9 +13,11 @@ export interface RootState {
   user: UserState;
   links: LinksState;
 }
+
 export const appReducer = {
   auth: authReducer,
   user: userReducer,
   links: linksReducer,
 };
+
 export const appEffects = [AuthEffects, UserEffects, LinksEffects];

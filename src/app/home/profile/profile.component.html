@@ -1,7 +1,4 @@
 <div class="card">
-  <ng-container *ngIf="loading && !user">
-    <p>Cargando</p>
-  </ng-container>
   <ng-container *ngIf="!loading && user">
     <div class="avatar">
       <img src="{{ user.avatar }}" alt="{{ user.fullName }}" />
@@ -15,5 +12,8 @@
         {{ user.description }}
       </p>
     </div>
+  </ng-container>
+  <ng-container *ngIf="loading && !user">
+    <h4>Cargandoooo...</h4>
   </ng-container>
 </div>

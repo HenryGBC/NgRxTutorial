@@ -6,7 +6,3 @@ export interface LinksState {
   addLink: boolean | null;
   errorAddLink: boolean | null;
 }
-
-export interface LinkState {
-  link: Link;
-}

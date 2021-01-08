@@ -18,7 +18,6 @@ export class LinksEffects {
         this._linksService.getLinks().pipe(
           map((response) =>
             linksActions.loadLinksComplete({
-              loading: false,
               links: response,
             })
           )
@@ -31,7 +30,7 @@ export class LinksEffects {
     this.actions$.pipe(
       ofType(linksActions.addLink),
       switchMap((payload) => this._linksService.addLink(payload.link)),
-      map((link) => linksActions.addLInkComplete({ link }))
+      map((link) => linksActions.addLinkComplete({ link }))
     )
   );
 }

@@ -9,8 +9,6 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { finalize, catchError, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { Store } from '@ngrx/store';
-import { logout } from '../store/auth/auth.actions';
 
 const API_URL = environment.apiUrl;
 @Injectable()
@@ -18,7 +16,7 @@ export class AppInterceptorService implements HttpInterceptor {
   private _requests = [];
   private _mapErrors: Map<any, string>;
 
-  constructor(private _store: Store) {}
+  constructor() {}
 
   intercept(
     req: HttpRequest<any>,
@@ -64,7 +62,6 @@ export class AppInterceptorService implements HttpInterceptor {
     if (isUnathorized || isForbidden) {
       // this._showDialogSessionExpired();
       //logout
-      this._store.dispatch(logout());
     }
     return throwError(error);
   }

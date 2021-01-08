@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as authReducer from './auth.reducer';
-import { AuthState } from './auth.model';
+import { AuthState } from './auth.state';
 
 // export const selectAuthState = createSelector(authReducer);
 export const getAuthFeatureState = createFeatureSelector('auth');
@@ -22,7 +22,3 @@ export const selectIsAuthStateLoginErrorMsg = createSelector(
   getAuthFeatureState,
   (state: AuthState) => state.errorMessageLogin
 );
-// export const selectUserInfo = createSelector(
-//   getAuthFeatureState,
-//   (state: AuthState) => state.profile
-// );
