@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { addLink } from 'src/app/core/store/links/links.actions';
+import * as linksSelector from '../../core/store/links/links.selectors';
+
 @Component({
   selector: 'app-add-link',
   templateUrl: './add-link.component.html',
@@ -10,7 +13,9 @@ import { Observable } from 'rxjs';
 })
 export class AddLinkComponent implements OnInit {
   linkForm: FormGroup;
-  constructor(private _formBuilder: FormBuilder) {
+  selectAddLink$: Observable<boolean>;
+  constructor(private _formBuilder: FormBuilder, private _store: Store) {
+    this.selectAddLink$ = this._store.select(linksSelector.selectAddLink);
     this._initForm();
   }
 
@@ -36,6 +41,7 @@ export class AddLinkComponent implements OnInit {
     }
     const data = { ...this.linkForm.value };
     console.log(data);
+    this._store.dispatch(addLink({ link: data }));
     // this._store.dispatch(login(data));
   }
 
@@ -43,6 +49,12 @@ export class AddLinkComponent implements OnInit {
     this.linkForm = this._formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
       url: ['', Validators.compose([Validators.required])],
+    });
+    this.selectAddLink$.subscribe((res) => {
+      console.log(res);
+      if (res) {
+        this.linkForm.reset();
+      }
     });
   }
 }
