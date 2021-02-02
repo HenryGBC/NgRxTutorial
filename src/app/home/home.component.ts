@@ -31,7 +31,14 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this._store.dispatch(getUser());
-    this._store.dispatch(loadLinks());
+
+    this.user$.subscribe((user: User) => {
+      console.log(user);
+      if (user) {
+        const userId = user.id;
+        this._store.dispatch(loadLinks({ userId }));
+      }
+    });
   }
 
   logout() {

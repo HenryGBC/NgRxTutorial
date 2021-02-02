@@ -17,6 +17,6 @@ export class UserService {
     //   countLinks: 4,
     // };
     // return of(userResponse).pipe(delay(5000));
-    return this._http.get('/users/user/');
+    return this._http.get('users/me');
   }
 }

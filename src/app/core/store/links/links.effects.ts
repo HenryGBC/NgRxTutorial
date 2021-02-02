@@ -14,8 +14,8 @@ export class LinksEffects {
   loadLinks$ = createEffect(() =>
     this.actions$.pipe(
       ofType(linksActions.loadLinks),
-      switchMap(() =>
-        this._linksService.getLinks().pipe(
+      switchMap(({ userId }) =>
+        this._linksService.getLinks(userId).pipe(
           map((response) =>
             linksActions.loadLinksComplete({
               links: response,

@@ -1,7 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 import { Link } from '../../models/links';
 
-export const loadLinks = createAction('[Links] LoadLinks');
+export const loadLinks = createAction(
+  '[Links] LoadLinks',
+  props<{ userId: number }>()
+);
 export const loadLinksComplete = createAction(
   '[Links] LoadLinksComplete',
   props<{ links: Link[] }>()

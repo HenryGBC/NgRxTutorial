@@ -20,11 +20,12 @@ export class AuthEffects {
       ofType(authActions.login),
       switchMap((payload) =>
         this._authService.login(payload).pipe(
-          map((response) =>
-            authActions.loginComplete({
-              token: response.access_token,
-            })
-          ),
+          map((response) => {
+            console.log(response);
+            return authActions.loginComplete({
+              token: response.jwt,
+            });
+          }),
           catchError(() =>
             of(
               authActions.errorLogin({
